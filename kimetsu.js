@@ -4,26 +4,8 @@ const hashiraEle = document.getElementById('hashira');
 const oniEle = document.getElementById('oni');
 const contentsEle = document.getElementById('contents');
 
-const kimetsuAllApi = async () => {
-    const response = await fetch('https://ihatov08.github.io/kimetsu_api/api/all.json');
-    const data = await response.json();
-    return data;
-}
-
-const kisatsuApi = async () => {
-    const response = await fetch('https://ihatov08.github.io/kimetsu_api/api/kisatsutai.json');
-    const data = await response.json();
-    return data;
-}
-
-const hashiraApi = async () => {
-    const response = await fetch('https://ihatov08.github.io/kimetsu_api/api/hashira.json');
-    const data = await response.json();
-    return data;
-}
-
-const oniApi = async () => {
-    const response = await fetch('https://ihatov08.github.io/kimetsu_api/api/oni.json');
+const apiFunction = async (value) => {
+    const response = await fetch(`https://ihatov08.github.io/kimetsu_api/api/${value}.json`);
     const data = await response.json();
     return data;
 }
@@ -47,7 +29,7 @@ const stopLoad = () => {
 // ページの初期表示に使用
 const initFunc = async () => {
     startLoad();
-    const result = await kimetsuAllApi();
+    const result = await apiFunction('all');
     showData(result);
     stopLoad();
 }
@@ -55,51 +37,31 @@ const initFunc = async () => {
 initFunc();
 
 kimetsuEle.addEventListener('click', async () => {
-    const dataAreaExist = document.getElementsByClassName('data-area');
-    if (dataAreaExist !== undefined) {
-        removeElement(dataAreaExist);
-    }
-
-    const result = await kimetsuAllApi();
-
-    // 結果挿入エリアを作成
-    showData(result);
+    await eventFunction('all');
 })
 
 kisatsuEle.addEventListener('click', async () => {
-    const dataAreaExist = document.getElementsByClassName('data-area');
-    if (dataAreaExist !== undefined) {
-        removeElement(dataAreaExist);
-    }
-    startLoad();
-    const result = await kisatsuApi();
-
-    // 結果挿入エリアを作成
-    showData(result);
-    stopLoad();
+    await eventFunction('kisatsutai');
 })
 
 hashiraEle.addEventListener('click', async () => {
-    const dataAreaExist = document.getElementsByClassName('data-area');
-    if (dataAreaExist !== undefined) {
-        removeElement(dataAreaExist);
-    }
-    startLoad();
-    const result = await hashiraApi();
-    showData(result);
-    stopLoad();
+    await eventFunction('hashira');
 })
 
 oniEle.addEventListener('click', async () => {
+    await eventFunction('oni');
+})
+
+const eventFunction = async (value) => {
     const dataAreaExist = document.getElementsByClassName('data-area');
     if (dataAreaExist !== undefined) {
         removeElement(dataAreaExist);
     }
     startLoad();
-    const result = await oniApi();
+    const result = await apiFunction(value);
     showData(result);
     stopLoad();
-})
+}
 
 // 取得データを表示
 const showData = (result) => {
