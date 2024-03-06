@@ -7,6 +7,28 @@
     <title>Kimetsu API</title>
 </head>
 <body>
+    <form>
+        <div class="radio-area">
+            <input id="all" type="radio" name="kimetsu" value="all" checked>
+            <label>全キャラクター</label>
+        </div>
+        <div class="radio-area">
+            <input id="kisatsu" type="radio" name="kimetsu" value="kisatsu">
+            <label>鬼殺隊</label>
+        </div>
+        <div class="radio-area">
+            <input id="hashira" type="radio" name="kimetsu" value="hashira">
+            <label>柱</label>
+        </div>
+        <div class="radio-area">
+            <input id="oni" type="radio" name="kimetsu" value="oni">
+            <label>鬼</label>
+        </div>
+    </form>
+    <main>
+        <div id="contents">
+        </div>
+    </main>
     <script src="kimetsu.js"></script>
 </body>
 </html>
